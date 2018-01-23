@@ -16,7 +16,10 @@ import org.springframework.stereotype.Service;
 public class ComputerServiceImpl extends BaseServiceImpl<ComputerDomain> implements IComputerService {
 
     @Autowired
-    private IComputerMapper computerMapper;
+    IComputerMapper computerMapper;
 
-
+    @Override
+    public Long getMaxId() {
+        return computerMapper.getMaxId();
+    }
 }

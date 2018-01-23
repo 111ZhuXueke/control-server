@@ -1,5 +1,6 @@
 package com.rui.control.Interceptor;
 
+import com.rui.web.cache.CacheManagerImpl;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -22,4 +23,14 @@ public class PathInterceptor extends HandlerInterceptorAdapter {
         super.postHandle(request, response, handler, modelAndView);
     }
 
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+//        CacheManagerImpl cacheManager = new CacheManagerImpl();
+//        // 判断用户是否登录
+//        if(!cacheManager.isContain("user")){
+//            //进入login页面
+//            response.sendRedirect(  "/computer/login");
+//        }
+        return super.preHandle(request, response, handler);
+    }
 }

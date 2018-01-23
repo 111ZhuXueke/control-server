@@ -62,8 +62,7 @@ public class ServerSocketThread extends Thread{
     	Robot robot = null;
 		try {  
 			robot = new Robot();//创建Robot对象  
-    	} catch (Exception e) {  
-            // TODO Auto-generated catch block  
+    	} catch (Exception e) {
             e.printStackTrace();  
 	    }  
 		robot.keyPress(KeyEvent.VK_CONTROL);  

@@ -10,7 +10,7 @@ import tk.mybatis.mapper.entity.Example;
  * @author : zhuxueke
  * @since : 2017-12-08 14:51
  **/
-public class ComputerQuery extends Query {
+public class ComputerQuery extends Query implements java.io.Serializable{
 
     private Integer id;
     private String name;
@@ -24,14 +24,12 @@ public class ComputerQuery extends Query {
         if(valid(id)){
             criteria.andEqualTo("id",id);
         }
-        if(valid(name)){
+        if(valid(name) && valid(pwd)){
             criteria.andEqualTo("name",name);
+            criteria.andEqualTo("pwd",pwd);
         }
         if(valid(ip)){
             criteria.andEqualTo("ip",ip);
-        }
-        if(valid(pwd)){
-            criteria.andEqualTo("pwd",pwd);
         }
         return queryCriteria;
     }
