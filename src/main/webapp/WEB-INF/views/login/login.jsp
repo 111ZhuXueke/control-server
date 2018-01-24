@@ -56,20 +56,24 @@
       </div>
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
-          <input name="" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
-          <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;册&nbsp;">
+          <input type="button" class="btn btn-success radius size-L sub" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
+          <input type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
         </div>
       </div>
     </form>
   </div>
 </div>
 <div class="footer">Copyright fzet by 2018-01-23</div>
-<script type="text/javascript" src="${basePath}static/h-ui/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="${basePath}static/h-ui/lib/jquery/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="${basePath}static/h-ui/h-ui/js/H-ui.min.js"></script>
 <script>
     $(function(){
         $(".sub").click(function(){
-            $.post("${basePath}computer/login",{"pwd":$("#pwd").val(),"name":$("#name").val()},function(result){
+            var online = false;
+            if($("#online").attr("checked")){
+                online = true;
+            }
+            $.post("${basePath}computer/login",{"pwd":$("#pwd").val(),"name":$("#name").val(),"online":online},function(result){
                 var obj = eval("("+result+")");
                 $(".msage").css("display","block");
                 var message = obj.message;
@@ -77,7 +81,7 @@
                     $(".back-msg").css("color","green");
                     $(".back-msg").html(message);
                     setTimeout(function(){
-                        window.location.href = "${basePath}computer/openApplication";
+                        window.location.href = "${basePath}computer/index";
                     },1000);
                 }else{
                     $(".back-msg").html(message);

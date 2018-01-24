@@ -17,6 +17,7 @@ public class ComputerDomain {
     private String ip;
     private String pwd;
     private Timestamp updateTime;
+    private Timestamp createTime;
 
     public Timestamp getUpdateTime() {
         return updateTime;
@@ -56,5 +57,13 @@ public class ComputerDomain {
 
     public void setIp(String ip) {
         this.ip = ip;
+    }
+
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
     }
 }

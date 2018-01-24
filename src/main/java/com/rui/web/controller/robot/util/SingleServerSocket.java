@@ -9,7 +9,7 @@ import java.net.Socket;
  **/
 public class SingleServerSocket {
     private static ServerSocket serverSocket = null;
-
+    public static Socket socket = null;
     public static ServerSocket getInstance(int port){
         if(serverSocket == null){
             try{
@@ -19,5 +19,13 @@ public class SingleServerSocket {
             }
         }
         return serverSocket;
+    }
+    /**
+     * 判断socket是否关闭
+     * @author : zhuxueke
+     * @since : 2018/1/24 18:23
+     */
+    public static boolean isClose(){
+        return socket.isClosed();
     }
 }

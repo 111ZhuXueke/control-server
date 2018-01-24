@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/aop 
@@ -9,7 +10,10 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd
 	http://www.springframework.org/schema/mvc
-	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+    http://www.springframework.org/schema/task
+	http://www.springframework.org/schema/task/spring-task.xsd
+    ">
 
 
 	<aop:aspectj-autoproxy />
@@ -35,8 +39,12 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
+    <task:annotation-driven/>
+
+     <!--自动注入端/> value 注解 -->
     <context:property-placeholder location="classpath:dbconfig.properties" ignore-unresolvable="true" />
-    <!-- 自定义拦截器 -->
+     <!--自定义拦截器-->
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**" />
@@ -44,8 +52,12 @@
             <!--  <mvc:exclude-mapping path="/userController/login"/>  -->
             <bean id="pathInterceptor" class="com.rui.control.Interceptor.PathInterceptor"></bean>
         </mvc:interceptor>
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**" />-->
+            <!--<bean id="userInterceptor" class="com.rui.control.Interceptor.UserInterceptor"></bean>-->
+        <!--</mvc:interceptor>-->
     </mvc:interceptors>
-    
+
     <!-- 容器默认的DefaultServletHandler处理 所有静态内容与无RequestMapping处理的URL-->
     <mvc:default-servlet-handler/>
     
@@ -64,7 +76,7 @@
 		</property>
 		<property name="order" value="1" />
     </bean>
-    
+
 <!--     <bean class="com.zx.loan.common.utils.GlobalConstant">
         <property name="locations">
             <value>classpath*:application.properties</value>

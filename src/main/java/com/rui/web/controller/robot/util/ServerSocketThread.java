@@ -14,17 +14,17 @@ import java.net.Socket;
  * @author : zhuxueke
  * @since : 2018-01-16 17:02
  **/
-public class ServerSocketThread extends Thread{
-   
-    private Socket socket;
+public class ServerSocketThread{
+
     public ServerSocketThread(Socket socket){
-        this.socket = socket;
+        SingleServerSocket.socket = socket;
+        run();
     }
-    @Override
+
     public void run() {
     	try{
             //根据输入输出流和客户端连接
-            InputStream inputStream = socket.getInputStream();
+            InputStream inputStream = SingleServerSocket.socket.getInputStream();
             InputStreamReader inputStreamReader=new InputStreamReader(inputStream);
             BufferedReader bufferedReader=new BufferedReader(inputStreamReader);
             String temp = null;
@@ -33,24 +33,25 @@ public class ServerSocketThread extends Thread{
                 info+=temp;
             }
             System.out.println("--------客户端连接成功--------");
-            System.out.println("服务端接收到客户端命令信息："+info+",当前服务端ip为："+socket.getInetAddress().getHostAddress());                    
-            OutputStream outputStream=socket.getOutputStream();
+            System.out.println("服务端接收到客户端命令信息："+info+",当前服务端ip为："+SingleServerSocket.socket.getInetAddress().getHostAddress());
+            OutputStream outputStream=SingleServerSocket.socket.getOutputStream();
             PrintWriter printWriter=new PrintWriter(outputStream);
             //对客户端的信息进行处理
             handleClient(info);
-            info = "服务端接收到客户端命令信息："+info+",当前服务端ip为："+socket.getInetAddress().getHostAddress();
+            info = "服务端接收到客户端命令信息："+info+",当前服务端ip为："+SingleServerSocket.socket.getInetAddress().getHostAddress();
             printWriter.print(info);
             printWriter.flush();
-            socket.shutdownOutput();//关闭输出流
+            SingleServerSocket.socket.shutdownOutput();//关闭输出流
             //关闭相对应的资源
             printWriter.close();
             outputStream.close();
             bufferedReader.close();
             inputStream.close();
-            socket.close();
+            SingleServerSocket.socket.close();
         }catch (Exception e){         
             System.out.println("--------客户端连接失败--------");
             System.out.println("--------ServerSocket或者client连接有误--------");
+            e.printStackTrace();
         }
     }
     /**

@@ -28,6 +28,9 @@ public class ComputerQuery extends Query implements java.io.Serializable{
             criteria.andEqualTo("name",name);
             criteria.andEqualTo("pwd",pwd);
         }
+        if(valid(name) && !valid(pwd)){
+            criteria.andEqualTo("name",name);
+        }
         if(valid(ip)){
             criteria.andEqualTo("ip",ip);
         }
