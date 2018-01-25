@@ -18,6 +18,8 @@ public class ComputerDomain {
     private String pwd;
     private Timestamp updateTime;
     private Timestamp createTime;
+    // 用户的唯一标识
+    private String mac;
 
     public Timestamp getUpdateTime() {
         return updateTime;
@@ -65,5 +67,13 @@ public class ComputerDomain {
 
     public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
+    }
+
+    public String getMac() {
+        return mac;
+    }
+
+    public void setMac(String mac) {
+        this.mac = mac;
     }
 }

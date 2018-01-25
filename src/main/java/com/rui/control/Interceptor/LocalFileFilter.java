@@ -8,6 +8,8 @@ import com.rui.web.controller.robot.util.ServerSocketThread;
 import com.rui.web.controller.robot.util.SingleServerSocket;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +29,7 @@ import java.util.Date;
  * @since : 2018-01-24 9:11
  **/
 public class LocalFileFilter implements Filter {
+
     CacheManagerImpl cacheManager = new CacheManagerImpl();
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -40,8 +43,10 @@ public class LocalFileFilter implements Filter {
         try{
             createFile();
             String servletPath = request.getServletPath();
+            // 过滤静态文件
             if(!servletPath.startsWith("/static/")){
-                if(!servletPath.endsWith("computer/login") && !servletPath.endsWith("computer/login")){
+                if(!servletPath.endsWith("computer/login") && !servletPath.endsWith("computer/login")
+                        && !servletPath.endsWith("web/getLocalFile")){
                     // 判断用户是否登录
                     boolean state = cacheManager.isContain("user");
                     if(!state){

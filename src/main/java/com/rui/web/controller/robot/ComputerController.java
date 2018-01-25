@@ -80,7 +80,7 @@ public class ComputerController extends AdminBaseController{
         try {
             String var1 = cacheManager.getCacheByKey("base64Str") != null ? cacheManager.getCacheByKey("base64Str").getDatas().toString() : null;
             if(var1 == null){
-                computerQuery.setPwd(new String(Base64.decodeBase64(computerQuery.getPwd().getBytes())));
+                computerQuery.setPwd(new String(Base64.encodeBase64(computerQuery.getPwd().getBytes())));
                 computerDomain = computerService.getOne(computerQuery);
                 if(computerDomain == null){
                     return errorObjectStr("用户名或密码错误!");
@@ -118,6 +118,7 @@ public class ComputerController extends AdminBaseController{
                     computerDomain.setIp(InetAddress.getLocalHost().getHostAddress().toString());
                     computerDomain.setUpdateTime(new Timestamp(System.currentTimeMillis()));
                     computerDomain.setCreateTime(new Timestamp(time));
+                    computerDomain.setMac(var1);
                 }else{
                     // 若存在相同数据、创建时间为当前时间
                     computerDomain.setCreateTime(new Timestamp(System.currentTimeMillis()));
