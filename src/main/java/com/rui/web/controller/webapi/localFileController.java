@@ -49,7 +49,7 @@ public class localFileController {
             if(file.exists()){
                 json.put("status", "success");
                 InputStream input = new FileInputStream(file);
-                byte[] bytes = new byte[1024];
+                byte[] bytes = new byte[input.available()];
                 int len = 0;
                 StringBuffer buffer = new StringBuffer();
                 while ((len = input.read(bytes)) != -1){

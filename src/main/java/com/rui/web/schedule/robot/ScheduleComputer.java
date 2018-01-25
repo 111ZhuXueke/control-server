@@ -43,18 +43,15 @@ public class ScheduleComputer {
      */
     @Scheduled(cron = "*/1 * * * * ?")  // 每秒钟执行一次
     public void excute(){
-//        ComputerDomain domain = cacheManager.getCacheByKey("user") != null ? (ComputerDomain)cacheManager.getCacheByKey("user").getDatas() : null;
-//        if(domain != null){
-//            try{
-//                ServerSocket serverSocket = SingleServerSocket.getInstance(Integer.parseInt(port));
-//                // 避免浪费资源
-//                if(SingleServerSocket.socket == null && SingleServerSocket.isClose()){
-//                    System.out.println("--------socket 已经启动，等待连接---------");
-//                    new ServerSocketThread(serverSocket.accept());
-//                }
-//            }catch (Exception e){
-//                e.printStackTrace();
-//            }
-//        }
+        try{
+            ServerSocket serverSocket = SingleServerSocket.getInstance(Integer.parseInt(port));
+            // 避免浪费资源
+            if(SingleServerSocket.socket == null || SingleServerSocket.isClose()){
+                System.out.println("--------socket 已经启动，等待连接---------");
+                new ServerSocketThread(serverSocket.accept());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
