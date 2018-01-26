@@ -13,15 +13,15 @@
 	<link rel="stylesheet" type="text/css" href="${basePath}static/h-ui/lib/Hui-iconfont/1.0.8/iconfont.css" />
 	<link rel="stylesheet" type="text/css" href="${basePath}static/h-ui/h-ui.admin/skin/default/skin.css" id="skin" />
 	<link rel="stylesheet" type="text/css" href="${basePath}static/h-ui/h-ui.admin/css/style.css" />
-	<title>H-ui.admin v3.1</title>
+	<title>后台登录 - 智能助手 - window版本</title>
 	<link rel="icon" href="${basePath}static/image/logo.ico" type="image/x-icon" />
 	<link rel="shortcut icon" href="${basePath}static/image/logo.ico" type="image/x-icon" />
 </head>
 <body>
 <header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
-		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/aboutHui.shtml">Intelligent assistant</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H-ui</a>
-			<span class="logo navbar-slogan f-l mr-10 hidden-xs">v0.1</span>
+		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/aboutHui.shtml">Intelligent assistant</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml"></a>
+			<span class="logo navbar-slogan f-l mr-10 hidden-xs"></span>
 			<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
 			<%--<nav class="nav navbar-nav">--%>
 				<%--<ul class="cl">--%>
@@ -42,12 +42,11 @@
 					<a href="#" class="dropDown_A">${com.name} <i class="Hui-iconfont">&#xe6d5;</i></a>
 					<ul class="dropDown-menu menu radius box-shadow">
 						<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
-						<li><a href="#">切换账户</a></li>
-                        <li><a href="javascript:;" onclick="stopServer()" class="stopServer">暂停服务</a></li>
-						<li><a href="#">退出</a></li>
+						<li><a href="${basePath}computer/signout">切换账户</a></li>
+						<li><a href="${basePath}computer/signout">退出</a></li>
                     </ul>
                 </li>
-				<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
+				<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">0</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
 				<li id="Hui-skin" class="dropDown right dropDown_hover"> <a href="javascript:;" class="dropDown_A" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
 					<ul class="dropDown-menu menu radius box-shadow">
 						<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
@@ -66,10 +65,10 @@
 <aside class="Hui-aside">
 	<div class="menu_dropdown bk_2">
 		<dl id="menu-article">
-			<dt><i class="Hui-iconfont">&#xe616;</i> 资讯管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe616;</i> 应用程序管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="article-list.html" data-title="资讯管理" href="javascript:void(0)">资讯管理</a></li>
+					<li><a data-href="article-list.html" data-title="应用管理" href="javascript:void(0)">应用管理</a></li>
 			</ul>
 		</dd>
 	</dl>
@@ -158,7 +157,7 @@
 		<div class="Hui-tabNav-wp">
 			<ul id="min_title_list" class="acrossTab cl">
 				<li class="active">
-					<span title="我的桌面" data-href="welcome.html">我的桌面</span>
+					<span title="我的桌面" data-href="${basePath}computer/welcome">我的桌面</span>
 					<em></em></li>
 		</ul>
 	</div>
@@ -167,7 +166,7 @@
 	<div id="iframe_box" class="Hui-article">
 		<div class="show_iframe">
 			<div style="display:none" class="loading"></div>
-			<iframe scrolling="yes" frameborder="0" src="welcome.html"></iframe>
+			<iframe scrolling="yes" frameborder="0" src="${basePath}computer/welcome"></iframe>
 	</div>
 </div>
 </section>

@@ -8,9 +8,7 @@ import com.rui.web.cache.CacheManagerImpl;
 import com.rui.web.cache.EntityCache;
 import com.rui.web.common.utils.DateUtils;
 import com.rui.web.controller.base.AdminBaseController;
-import com.rui.web.controller.robot.util.BaseDao;
-import com.rui.web.controller.robot.util.ServerSocketThread;
-import com.rui.web.controller.robot.util.SingleServerSocket;
+import com.rui.web.controller.robot.model.InformationModel;
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.sql.Timestamp;
@@ -84,6 +83,9 @@ public class ComputerController extends AdminBaseController{
                 computerDomain = computerService.getOne(computerQuery);
                 if(computerDomain == null){
                     return errorObjectStr("用户名或密码错误!");
+                }else{
+                    // 更新时间
+                    computerDomain.setUpdateTime(new Timestamp(System.currentTimeMillis()));
                 }
             }else{
                 // 未注册的用户登录
@@ -115,10 +117,12 @@ public class ComputerController extends AdminBaseController{
                     computerDomain.setName(name);
                     // 默认密码为输入的密码
                     computerDomain.setPwd(new String(Base64.encodeBase64(computerQuery.getPwd().getBytes())));
+                    computerDomain.setLastIp(computerDomain.getIp());
                     computerDomain.setIp(InetAddress.getLocalHost().getHostAddress().toString());
                     computerDomain.setUpdateTime(new Timestamp(System.currentTimeMillis()));
                     computerDomain.setCreateTime(new Timestamp(time));
                     computerDomain.setMac(var1);
+                    computerDomain.setPort("18888");
                 }else{
                     // 若存在相同数据、创建时间为当前时间
                     computerDomain.setCreateTime(new Timestamp(System.currentTimeMillis()));
@@ -130,15 +134,6 @@ public class ComputerController extends AdminBaseController{
             }
             // 设置 user 过期时间为 30min
             cacheManager.putCache("user", new EntityCache(computerDomain, DateUtils.getFutureDate(30),System.currentTimeMillis()));
-            // 保持登录
-            // 目前为本地缓存，正确方式应为服务器缓存
-//            if(online){
-//                cacheManager.putCache("uname", new EntityCache(domain.getName(),0L,0L));
-//                cacheManager.putCache("upwd", new EntityCache(domain.getPwd(),0L,0L));
-//            }else{
-//                cacheManager.clearByKey("uname");
-//                cacheManager.clearByKey("upwd");
-//            }
         }catch (Exception e){
             logger.info("登录失败:" + e.getMessage());
             // 向服务端发送错误信息
@@ -157,6 +152,33 @@ public class ComputerController extends AdminBaseController{
     public ModelAndView index(ModelAndView modelAndView){
         modelAndView.setViewName("login/index");
         modelAndView.addObject("com",(ComputerDomain) cacheManager.getCacheByKey("user").getDatas());
+        return modelAndView;
+    }
+    /**
+     * welcome 页面 ==> 我的桌面
+     * @author : zhuxueke
+     * @since : 2018/1/26 14:11
+     */
+    @RequestMapping(value = "/welcome",method = RequestMethod.GET)
+    public ModelAndView welcome(ModelAndView modelAndView, HttpServletRequest request){
+        modelAndView.setViewName("login/welcome");
+        InformationModel info = computerService.getComputerInfo();
+        info.setSessionId(request.getRequestedSessionId());
+        modelAndView.addObject("info", info);
+        modelAndView.addObject("welcome", getUser());
+        return modelAndView;
+    }
+
+    /**
+     * 退出
+     * @author : zhuxueke
+     * @since : 2018/1/26 15:22
+     */
+    @RequestMapping(value = "/signout",method = RequestMethod.GET)
+    public ModelAndView signout(){
+        ModelAndView modelAndView = new ModelAndView();
+        cacheManager.clearAll();
+        modelAndView.setViewName("login/login");
         return modelAndView;
     }
 }

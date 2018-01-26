@@ -5,7 +5,7 @@ import javax.persistence.Table;
 import java.sql.Timestamp;
 
 /**
- * 本地电脑信息类
+ * 计算机用户表
  * @author : zhuxueke
  * @since : 2018-01-17 18:29
  **/
@@ -20,6 +20,17 @@ public class ComputerDomain {
     private Timestamp createTime;
     // 用户的唯一标识
     private String mac;
+    // 占用的端口
+    private String port;
+    private String lastIp;
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
 
     public Timestamp getUpdateTime() {
         return updateTime;
@@ -75,5 +86,13 @@ public class ComputerDomain {
 
     public void setMac(String mac) {
         this.mac = mac;
+    }
+
+    public String getLastIp() {
+        return lastIp;
+    }
+
+    public void setLastIp(String lastIp) {
+        this.lastIp = lastIp;
     }
 }

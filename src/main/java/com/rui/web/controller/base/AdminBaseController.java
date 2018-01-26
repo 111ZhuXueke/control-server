@@ -3,6 +3,9 @@ package com.rui.web.controller.base;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.rui.control.domain.ComputerDomain;
+import com.rui.web.cache.CacheManagerImpl;
+import com.rui.web.common.model.AdminModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +17,7 @@ import java.util.Map;
  * @since : 2017-12-13 14:29
  **/
 public class AdminBaseController {
-
+    CacheManagerImpl cacheManager = new CacheManagerImpl();
     private static Logger logger = LoggerFactory.getLogger(AdminBaseController.class);
 
     /**
@@ -22,15 +25,10 @@ public class AdminBaseController {
      * @author : zhuxueke
      * @since : 2017/12/13 14:39
      */
-//    protected AdminModel<UserDomain> getAdmin(){
-//        AdminModel<UserDomain> adminModel = null;
-//        try{
-//            // ...
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        return adminModel;
-//    }
+    protected ComputerDomain getUser(){
+        ComputerDomain domain = cacheManager.getCacheByKey("user") != null ? (ComputerDomain)cacheManager.getCacheByKey("user").getDatas() : null;
+        return domain;
+    }
 
     /**
      * success

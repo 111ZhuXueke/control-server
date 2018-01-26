@@ -12,11 +12,9 @@
     <link href="${basePath}static/h-ui/h-ui.admin/css/H-ui.login.css" rel="stylesheet" type="text/css" />
     <link href="${basePath}static/h-ui/h-ui.admin/css/style.css" rel="stylesheet" type="text/css" />
     <link href="${basePath}static/h-ui/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
-    <title>后台登录 - 智能助手 - 本地版本</title>
+    <title>后台登录 - 智能助手 - window版本</title>
     <link rel="icon" href="${basePath}static/image/logo.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="${basePath}static/image/logo.ico" type="image/x-icon" />
-<%--<meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">--%>
-<%--<meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">--%>
 </head>
 <body>
 <input type="hidden" id="TenantId" name="TenantId" value="" />
@@ -32,14 +30,14 @@
       </div>
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
-        <div class="formControls col-xs-8">
+        <div class="formControls col-xs-5">
           <input  id="pwd" type="password" placeholder="密码" class="input-text size-L" value="${upwd}">
         </div>
       </div>
         <div class="row cl">
             <label class="form-label col-xs-3"></label>
             <div class="formControls col-xs-8">
-                <label class="form-label col-xs-3 back-msg"></label>
+                <label class="form-label col-xs-8 back-msg"></label>
             </div>
         </div>
       <%--<div class="row cl">--%>

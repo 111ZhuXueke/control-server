@@ -4,6 +4,8 @@ import com.rui.control.domain.ComputerDomain;
 import com.rui.control.query.ComputerQuery;
 import com.rui.control.service.IComputerService;
 import com.rui.web.cache.CacheManagerImpl;
+import com.rui.web.cache.EntityCache;
+import com.rui.web.common.utils.DateUtils;
 import com.rui.web.controller.robot.util.ServerSocketThread;
 import com.rui.web.controller.robot.util.SingleServerSocket;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,10 @@ public class ScheduleComputer {
     @Scheduled(cron = "*/1 * * * * ?")  // 每秒钟执行一次
     public void excute(){
         try{
+            ComputerDomain domain = cacheManager.getCacheByKey("user") != null ? (ComputerDomain)cacheManager.getCacheByKey("user").getDatas() : null;
+            if(domain != null){
+                port = domain.getPort();
+            }
             ServerSocket serverSocket = SingleServerSocket.getInstance(Integer.parseInt(port));
             // 避免浪费资源
             if(SingleServerSocket.socket == null || SingleServerSocket.isClose()){
