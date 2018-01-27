@@ -96,6 +96,11 @@ public class ComputerController extends AdminBaseController{
                 if(!computerQuery.getName().equals(name)){
                     return errorObjectStr("用户名输入有误!");
                 }
+
+
+
+
+                
                 ComputerQuery query = new ComputerQuery();
                 query.setPwd(null);
                 query.setName(name);
