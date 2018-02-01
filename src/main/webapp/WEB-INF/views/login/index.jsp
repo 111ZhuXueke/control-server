@@ -68,7 +68,7 @@
 			<dt><i class="Hui-iconfont">&#xe616;</i> 应用程序管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="article-list.html" data-title="应用管理" href="javascript:void(0)">应用管理</a></li>
+					<li><a data-href="${basePath}application/index" data-title="应用管理" href="javascript:void(0)">应用管理</a></li>
 			</ul>
 		</dd>
 	</dl>

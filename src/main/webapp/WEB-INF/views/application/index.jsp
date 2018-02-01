@@ -1,4 +1,6 @@
-﻿<!DOCTYPE HTML>
+﻿<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
+<!DOCTYPE HTML>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -20,58 +22,36 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 应用程序管理 <span class="c-gray en">&gt;</span> 应用程序列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<form>
 		<div class="text-c">
 			日期范围：
-			<input type="text" placeholder="开始日期" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="input-text Wdate" style="width:120px;">
+			<input type="text" placeholder="开始日期" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'beginTime\')||\'%y-%M-%d\'}' })" id="beginTime" class="input-text Wdate" style="width:120px;">
 			-
-			<input type="text" placeholder="结束日期" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })" id="logmax" class="input-text Wdate" style="width:120px;">
-			<input type="text" name="applicationName" placeholder="应用程序名称" style="width:250px" class="input-text">
-			<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+			<input type="text" placeholder="结束日期" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'endTime\')}',maxDate:'%y-%M-%d' })" id="endTime" class="input-text Wdate" style="width:120px;">
+			<input type="text" name="applicationName" id="applicationName" placeholder="应用程序名称" style="width:250px" class="input-text">
+			<button name="" id="on-search" class="btn btn-success" type="button"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 		</div>
-		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" data-title="添加资讯" data-href="article-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加资讯</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
+		<div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="l">
+                <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+                <a class="btn btn-primary radius" data-title="新增应用" onclick="article_add('新增应用','新增应用',300,500)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 新增应用</a>
+            </span>
+            <span class="r">共有数据：<strong>54</strong> 条</span>
+        </div>
 		<div class="mt-20">
 			<table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
 				<thead>
 					<tr class="text-c">
 						<th width="25"><input type="checkbox" name="" value=""></th>
 						<th width="80">ID</th>
-						<th>标题</th>
-						<th width="80">分类</th>
-						<th width="80">来源</th>
-						<th width="120">更新时间</th>
-						<th width="75">浏览次数</th>
-						<th width="60">发布状态</th>
+						<th width="100">应用程序名称</th>
+						<th width="200">应用程序路径</th>
+						<th width="80">创建时间</th>
+						<th width="80">类别</th>
 						<th width="120">操作</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr class="text-c">
-						<td><input type="checkbox" value="" name=""></td>
-						<td>10001</td>
-						<td class="text-l"><u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','article-zhang.html','10001')" title="查看">资讯标题</u></td>
-						<td>行业动态</td>
-						<td>H-ui</td>
-						<td>2014-6-11 11:11:42</td>
-						<td>21212</td>
-						<td class="td-status"><span class="label label-success radius">已发布</span></td>
-						<td class="f-14 td-manage"><a style="text-decoration:none" onClick="article_stop(this,'10001')" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑','article-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-					</tr>
-					<tr class="text-c">
-						<td><input type="checkbox" value="" name=""></td>
-						<td>10002</td>
-						<td class="text-l"><u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','article-zhang.html','10002')" title="查看">资讯标题</u></td>
-						<td>行业动态</td>
-						<td>H-ui</td>
-						<td>2014-6-11 11:11:42</td>
-						<td>21212</td>
-						<td class="td-status"><span class="label label-success radius">草稿</span></td>
-						<td class="f-14 td-manage"><a style="text-decoration:none" onClick="article_shenhe(this,'10001')" href="javascript:;" title="审核">审核</a> <a style="text-decoration:none" class="ml-5" onClick="article_edit('资讯编辑','article-add.html','10001')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-					</tr>
-				</tbody>
 			</table>
 		</div>
-	</form>
 </div>
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="${basePath}static/h-ui/lib/jquery/1.9.1/jquery.min.js"></script>
@@ -84,25 +64,78 @@
 <script type="text/javascript" src="${basePath}static/h-ui/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="${basePath}static/h-ui/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
-$('.table-sort').dataTable({
-	"aaSorting": [[ 1, "desc" ]],//默认第几个排序
-	"bStateSave": true,//状态保存
-	"pading":false,
-	"aoColumnDefs": [
-	  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-	  {"orderable":false,"aTargets":[0,8]}// 不参与排序的列
-	]
-});
+    var tbl;
+    $(function () {
+        tbl=$('.table-sort').dataTable({
+            "aaSorting": [[ 1, "desc" ]],//默认第几个排序
+            /*          "bStateSave": true,//状态保存 */
+            "aLengthMenu" : [ 20, 50, 100 ] , //更改显示记录数选项         "iDisplayLength" : 2, //默认显示的记录数
+            "bLengthChange": false,                  //是否允许用户自定义每页显示条数。
+            "bPaginate": true,                      //是否分页。
+            "bProcessing": true,                    //当datatable获取数据时候是否显示正在处理提示信息。
+            "sPaginationType": 'full_numbers',      //分页样式
+            "serverSide":true,
+            "ajax": {
+                url:"${basePath}application/index",
+                type:"post",
+                dataType: "json",
+                data:function (d) {
+                    d.search= d.search.value;
+                    d.sort= d.order[0].column;
+                    d.sort_way= d.order[0].dir;
+                    d.applicationName= $("#applicationName").val();
+                    d.beginTime= $("#beginTime").val();
+                    d.endTime= $("#endTime").val();
+                },
+                dataSrc:
+                    function(data){
+                        if(data.recordsTotal==null){
+                            data.recordsTotal=0;
+                        }
+                        //查询结束取消按钮不可用
+                        return data.rows;//自定义数据源，默认为data
+                    },
+            },
+            "retrieve":true,
+            "columns": [
+                { "data": "uid",
+                    "bSortable": false,
+                    "render": function ( data, type, full, meta ) {
+                        return '<input type="checkbox" value="'+data+'" name="">';
+                    }
+                },
+                { "data": "id" },
+                { "data": "id" ,"bSortable": false},
+                { "data": "applicationName" ,"bSortable": false},
+                { "data": "applicationUrl" ,"bSortable": false},
+                { "data": "createTime" ,"bSortable": false},
+                { "data":  null,"bSortable": false,
+                    "render": function (data, type,row) {
+                        var id = '"' + data.id + '"';
+                        var html = "<a title='编辑' href='javascript:;' class='ml-5' onclick='user_edit(\"编辑\",\"users-add.jsp\","+ id + ",\"\",\"510\")' class='ml-5' style='text-decoration:none'><i class='Hui-iconfont'></i></a>";
+                        html+="<a style='text-decoration:none' class='ml-5' onClick='user_stop(this,"+ id + ")' href='javascript:void(0);' title='停用'><i class='Hui-iconfont'></i></a>";
+                        html+="<a style='text-decoration:none' class='ml-5' onClick='change_password(\"修改密码\",\"change-password.jsp\","+ id + ",\"600\",\"270\")' href='javascript:;' title='修改密码'><i class='Hui-iconfont'></i></a>"
+                        return html;
+                    }
+                }
+            ],
+        });
+        $("#on-search").click(function () {
+            var oSettings = tbl.fnSettings();
+            tbl.fnClearTable(0);
+            tbl.fnDraw();
 
-/*资讯-添加*/
-function article_add(title,url,w,h){
-	var index = layer.open({
-		type: 2,
-		title: title,
-		content: url
-	});
-	layer.full(index);
-}
+        });
+    });
+    /*应用程序-添加*/
+	function article_add(title,url,w,h){
+		var index = layer.open({
+			type: 2,
+			title: title,
+			content: url
+		});
+		layer.full(index);
+	}
 /*资讯-编辑*/
 function article_edit(title,url,id,w,h){
 	var index = layer.open({

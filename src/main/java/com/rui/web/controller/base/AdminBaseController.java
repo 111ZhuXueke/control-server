@@ -6,17 +6,19 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.rui.control.domain.ComputerDomain;
 import com.rui.web.cache.CacheManagerImpl;
 import com.rui.web.common.model.AdminModel;
+import com.rui.web.common.model.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * @author : zhuxueke
  * @since : 2017-12-13 14:29
  **/
-public class AdminBaseController {
+public class AdminBaseController<T> {
     CacheManagerImpl cacheManager = new CacheManagerImpl();
     private static Logger logger = LoggerFactory.getLogger(AdminBaseController.class);
 
@@ -65,5 +67,19 @@ public class AdminBaseController {
 
     protected String toJSONFormatString(Object object) {
         return JSON.toJSONString(object, SerializerFeature.WriteMapNullValue,SerializerFeature.WriteDateUseDateFormat);
+    }
+
+    /**
+     * 集合、model、总数量
+     * @author : zhuxueke
+     * @since : 2018/1/31 14:58
+     */
+    protected String listToJsonString(List<T> list, Integer size, Integer pageIndex){
+        Map map = new HashMap<String, String>();
+        map.put("data", JSON.toJSONString(list));
+        map.put("size", size);
+        map.put("pageIndex",pageIndex);
+        map.put("count",list.size());
+        return JSON.toJSONString(map);
     }
 }

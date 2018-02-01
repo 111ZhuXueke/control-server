@@ -10,7 +10,7 @@ import java.sql.Timestamp;
  * @since : 2018-01-26 11:04
  **/
 @Table(name = "application")
-public class ApplicationDomain {
+public class ApplicationDomain implements java.io.Serializable {
 
     @Id
     private Long id;
@@ -23,7 +23,7 @@ public class ApplicationDomain {
     // 应用程序创建时间
     private Timestamp createTime;
     // 删除标识
-    private Integer isClose;
+    private Integer isclose;
 
     public Long getId() {
         return id;
@@ -65,11 +65,11 @@ public class ApplicationDomain {
         this.createTime = createTime;
     }
 
-    public Integer getIsClose() {
-        return isClose;
+    public Integer getIsclose() {
+        return isclose;
     }
 
-    public void setIsClose(Integer isClose) {
-        this.isClose = isClose;
+    public void setIsclose(Integer isclose) {
+        this.isclose = isclose;
     }
 }
