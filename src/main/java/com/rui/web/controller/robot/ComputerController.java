@@ -80,6 +80,7 @@ public class ComputerController extends AdminBaseController{
             String var1 = cacheManager.getCacheByKey("base64Str") != null ? cacheManager.getCacheByKey("base64Str").getDatas().toString() : null;
             if(var1 == null){
                 computerQuery.setPwd(new String(Base64.encodeBase64(computerQuery.getPwd().getBytes())));
+                computerQuery.setName(computerQuery.getName().toLowerCase());
                 computerDomain = computerService.getOne(computerQuery);
                 if(computerDomain == null){
                     return errorObjectStr("用户名或密码错误!");
@@ -91,9 +92,15 @@ public class ComputerController extends AdminBaseController{
                 // 未注册的用户登录
                 // base64Str 只有在第一次启动项目才会存在
                 String name = System.getenv("USERNAME");
+                computerQuery.setName(computerQuery.getName().toLowerCase());
                 if(!computerQuery.getName().equals(name)){
                     return errorObjectStr("用户名输入有误!");
                 }
+
+
+
+
+                
                 ComputerQuery query = new ComputerQuery();
                 query.setPwd(null);
                 query.setName(name);
