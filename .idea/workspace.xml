@@ -8,12 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="774281fe-029a-4ef4-8627-0759c53b17a4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rui/control/domain/ApplicationDomain.java" afterPath="$PROJECT_DIR$/src/main/java/com/rui/control/domain/ApplicationDomain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rui/web/controller/robot/ApplicationController.java" afterPath="$PROJECT_DIR$/src/main/java/com/rui/web/controller/robot/ApplicationController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dbconfig.properties" afterPath="$PROJECT_DIR$/src/main/resources/dbconfig.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/application/add.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/application/add.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/application/index.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/application/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/static/h-ui/lib/datatables/1.10.0/jquery.dataTables.min.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/h-ui/lib/datatables/1.10.0/jquery.dataTables.min.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -99,8 +93,8 @@
       <file leaf-file-name="ApplicationDomain.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/rui/control/domain/ApplicationDomain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+            <state relative-caret-position="450">
+              <caret line="18" column="13" lean-forward="true" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -693,7 +687,7 @@
       <workItem from="1517362682564" duration="9213000" />
       <workItem from="1517473799851" duration="2050000" />
       <workItem from="1517554925362" duration="4506000" />
-      <workItem from="1517821321146" duration="69000" />
+      <workItem from="1517821321146" duration="1112000" />
     </task>
     <task id="LOCAL-00001" summary="zxk join h-ui、pages、update autowired port">
       <created>1516700553822</created>
@@ -744,11 +738,18 @@
       <option name="project" value="LOCAL" />
       <updated>1517475997889</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="zxk">
+      <created>1517821413295</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1517821413295</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94359000" />
+    <option name="totallyTimeSpent" value="95402000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -801,7 +802,8 @@
     <MESSAGE value="zxk 客户端和服务端交互完成" />
     <MESSAGE value="zxk welcome 页面完成" />
     <MESSAGE value="zxk application add 页面" />
-    <option name="LAST_COMMIT_MESSAGE" value="zxk application add 页面" />
+    <MESSAGE value="zxk" />
+    <option name="LAST_COMMIT_MESSAGE" value="zxk" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -869,6 +871,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="123">
           <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1135,6 +1140,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="2" column="3" lean-forward="true" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1142,6 +1148,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1200,8 +1207,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rui/control/domain/ApplicationDomain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        <state relative-caret-position="450">
+          <caret line="18" column="13" lean-forward="true" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
