@@ -33,7 +33,7 @@
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
             <span class="l">
                 <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-                <a class="btn btn-primary radius" data-title="新增应用" onclick="article_add('新增应用','新增应用',300,500)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 新增应用</a>
+                <a class="btn btn-primary radius" data-title="新增应用" onclick="article_add('新增应用','${basePath}application/add',300,500)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 新增应用</a>
             </span>
             <span class="r">共有数据：<strong>54</strong> 条</span>
         </div>
@@ -64,68 +64,14 @@
 <script type="text/javascript" src="${basePath}static/h-ui/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="${basePath}static/h-ui/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
-    var tbl;
-    $(function () {
-        tbl=$('.table-sort').dataTable({
-            "aaSorting": [[ 1, "desc" ]],//默认第几个排序
-            /*          "bStateSave": true,//状态保存 */
-            "aLengthMenu" : [ 20, 50, 100 ] , //更改显示记录数选项         "iDisplayLength" : 2, //默认显示的记录数
-            "bLengthChange": false,                  //是否允许用户自定义每页显示条数。
-            "bPaginate": true,                      //是否分页。
-            "bProcessing": true,                    //当datatable获取数据时候是否显示正在处理提示信息。
-            "sPaginationType": 'full_numbers',      //分页样式
-            "serverSide":true,
-            "ajax": {
-                url:"${basePath}application/index",
-                type:"post",
-                dataType: "json",
-                data:function (d) {
-                    d.search= d.search.value;
-                    d.sort= d.order[0].column;
-                    d.sort_way= d.order[0].dir;
-                    d.applicationName= $("#applicationName").val();
-                    d.beginTime= $("#beginTime").val();
-                    d.endTime= $("#endTime").val();
-                },
-                dataSrc:
-                    function(data){
-                        if(data.recordsTotal==null){
-                            data.recordsTotal=0;
-                        }
-                        //查询结束取消按钮不可用
-                        return data.rows;//自定义数据源，默认为data
-                    },
-            },
-            "retrieve":true,
-            "columns": [
-                { "data": "uid",
-                    "bSortable": false,
-                    "render": function ( data, type, full, meta ) {
-                        return '<input type="checkbox" value="'+data+'" name="">';
-                    }
-                },
-                { "data": "id" },
-                { "data": "id" ,"bSortable": false},
-                { "data": "applicationName" ,"bSortable": false},
-                { "data": "applicationUrl" ,"bSortable": false},
-                { "data": "createTime" ,"bSortable": false},
-                { "data":  null,"bSortable": false,
-                    "render": function (data, type,row) {
-                        var id = '"' + data.id + '"';
-                        var html = "<a title='编辑' href='javascript:;' class='ml-5' onclick='user_edit(\"编辑\",\"users-add.jsp\","+ id + ",\"\",\"510\")' class='ml-5' style='text-decoration:none'><i class='Hui-iconfont'></i></a>";
-                        html+="<a style='text-decoration:none' class='ml-5' onClick='user_stop(this,"+ id + ")' href='javascript:void(0);' title='停用'><i class='Hui-iconfont'></i></a>";
-                        html+="<a style='text-decoration:none' class='ml-5' onClick='change_password(\"修改密码\",\"change-password.jsp\","+ id + ",\"600\",\"270\")' href='javascript:;' title='修改密码'><i class='Hui-iconfont'></i></a>"
-                        return html;
-                    }
-                }
-            ],
-        });
-        $("#on-search").click(function () {
-            var oSettings = tbl.fnSettings();
-            tbl.fnClearTable(0);
-            tbl.fnDraw();
-
-        });
+    $('.table-sort').dataTable({
+        "aaSorting": [[ 1, "desc" ]],//默认第几个排序
+        "bStateSave": true,//状态保存
+        "pading":false,
+        "aoColumnDefs": [
+            //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+            {"orderable":false,"aTargets":[0,8]}// 不参与排序的列
+        ]
     });
     /*应用程序-添加*/
 	function article_add(title,url,w,h){
@@ -163,26 +109,6 @@ function article_del(obj,id){
 	});
 }
 
-/*资讯-审核*/
-function article_shenhe(obj,id){
-	layer.confirm('审核文章？', {
-		btn: ['通过','不通过','取消'], 
-		shade: false,
-		closeBtn: 0
-	},
-	function(){
-		$(obj).parents("tr").find(".td-manage").prepend('<a class="c-primary" onClick="article_start(this,id)" href="javascript:;" title="申请上线">申请上线</a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已发布</span>');
-		$(obj).remove();
-		layer.msg('已发布', {icon:6,time:1000});
-	},
-	function(){
-		$(obj).parents("tr").find(".td-manage").prepend('<a class="c-primary" onClick="article_shenqing(this,id)" href="javascript:;" title="申请上线">申请上线</a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-danger radius">未通过</span>');
-		$(obj).remove();
-    	layer.msg('未通过', {icon:5,time:1000});
-	});	
-}
 /*资讯-下架*/
 function article_stop(obj,id){
 	layer.confirm('确认要下架吗？',function(index){

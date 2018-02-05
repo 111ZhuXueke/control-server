@@ -20,42 +20,32 @@
 </head>
 <body>
 <article class="page-container">
-	<form class="form form-horizontal" id="form-article-add">
+	<form class="form form-horizontal" id="form-article-add" action="${basePath}application/add">
+		<input type="hidden" class="input-text" name="computerId" value="${computerId}" >
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>应用名称：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="articletitle" name="articletitle">
+				<input type="text" class="input-text" name="applicationName" value="" placeholder="" >
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">路径：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="articletitle2" name="articletitle2">
+				<input type="file" name="applicationUrl" class="btn btn-primary radius" value="" placeholder="" >
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>类别：</label>
 			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
-				<select name="articlecolumn" class="select">
-					<option value="0">全部栏目</option>
-					<option value="1">新闻资讯</option>
-					<option value="11">├行业动态</option>
-					<option value="12">├行业资讯</option>
-					<option value="13">├行业新闻</option>
+				<select name="type" class="select">
+					<option value="">---请选择---</option>
+					<option value="0">音乐</option>
+					<option value="1">视频</option>
+					<option value="2">其他</option>
 				</select>
 				</span> </div>
 		</div>
 
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">缩略图：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<div class="uploader-thum-container">
-					<div id="fileList" class="uploader-list"></div>
-					<div id="filePicker">选择图片</div>
-					<button id="btn-star" class="btn btn-default btn-uploadstar radius ml-10">开始上传</button>
-				</div>
-			</div>
-		</div>
 	</form>
 </article>
 
@@ -75,51 +65,25 @@ $(function(){
 	//表单验证
 	$("#form-article-add").validate({
 		rules:{
-			articletitle:{
+            applicationName:{
 				required:true,
 			},
-			articletitle2:{
+            applicationUrl:{
 				required:true,
 			},
-			articlecolumn:{
+            type:{
 				required:true,
 			},
-			articletype:{
-				required:true,
-			},
-			articlesort:{
-				required:true,
-			},
-			keywords:{
-				required:true,
-			},
-			abstract:{
-				required:true,
-			},
-			author:{
-				required:true,
-			},
-			sources:{
-				required:true,
-			},
-			allowcomments:{
-				required:true,
-			},
-			commentdatemin:{
-				required:true,
-			},
-			commentdatemax:{
-				required:true,
-			},
-
 		},
 		onkeyup:false,
 		focusCleanup:true,
 		success:"valid",
 		submitHandler:function(form){
-			//$(form).ajaxSubmit();
+			$(form).ajaxSubmit(function(data){
+			    alert(data);
+			});
 			var index = parent.layer.getFrameIndex(window.name);
-			//parent.$('.btn-refresh').click();
+			parent.$('.btn-refresh').click();
 			parent.layer.close(index);
 		}
 	});

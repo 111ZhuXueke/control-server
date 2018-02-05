@@ -57,8 +57,9 @@ public class ApplicationController extends AdminBaseController {
      * @since : 2018/1/31 11:19
      */
     @RequestMapping(value = "/add",method = RequestMethod.GET)
-    public ModelAndView add(){
+    public ModelAndView add(Long computerId){
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("computerId",computerId);
         modelAndView.setViewName("application/add");
         return modelAndView;
     }
@@ -70,8 +71,9 @@ public class ApplicationController extends AdminBaseController {
      */
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
-    public String add(ApplicationDomain applicationDomain){
+    public String add(ApplicationDomain applicationDomain,Long computerId){
         try{
+            applicationDomain.setComputerId(computerId);
             applicationService.create(applicationDomain);
             if(applicationDomain.getId() == null){
                 return errorObjectStr("添加失败!");
