@@ -10,7 +10,7 @@ import java.sql.Timestamp;
  * @since : 2018-01-17 18:29
  **/
 @Table(name = "computer")
-public class ComputerDomain {
+public class ComputerDomain implements java.io.Serializable{
     @Id
     private Long id;
     private String name;
