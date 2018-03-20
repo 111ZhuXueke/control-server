@@ -54,6 +54,9 @@ public class CacheManagerImpl implements ICacheManager {
 
     @Override
     public boolean isContain(String key) {
+        if(isTimeOut(key)){
+            return false;
+        }
         return cacheMap.containsKey(key);
     }
 
